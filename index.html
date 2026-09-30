@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ashur — Developer</title>
 <meta name="description" content="Self-taught developer building smart contracts, bots, web apps, and browser games. Here's my real, shipped work.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ashur — Developer">
+<meta property="og:description" content="Smart contracts, bots, web apps, and browser games. Real, shipped work you can try in your browser.">
+<meta property="og:url" content="https://ashur0.github.io/portfolio/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ashur — Developer">
+<meta name="twitter:description" content="Smart contracts, bots, web apps, and browser games. Real, shipped work you can try in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2335e6f2'/%3E%3Cstop offset='1' stop-color='%23ff4fd8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230a0d13'/%3E%3Ccircle cx='16' cy='16' r='7' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -42,6 +50,13 @@
   .name span { color: var(--faint); font-weight: 400; }
   .status { display: inline-flex; align-items: center; gap: 7px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12.5px; color: var(--ok); background: var(--ok-soft); border: 1px solid color-mix(in srgb, var(--ok) 28%, transparent); padding: 4px 10px; border-radius: 999px; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+  .theme-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; transition: color .15s, border-color .15s; }
+  .theme-btn:hover { color: var(--ink); border-color: var(--accent); }
+
+  .techstrip { border-top: 1px solid var(--line); background: var(--surface); }
+  .techstrip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-block: 16px; }
+  .techstrip .lead { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-right: 6px; }
+  .techstrip .t { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; }
 
   /* hero with live canvas */
   .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background: #0a0d13; }
@@ -93,7 +108,12 @@
 <header>
   <div class="wrap head-inner">
     <p class="name">Ashur <span>/ developer</span></p>
-    <span class="status"><span class="dot"></span> Available for freelance work</span>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="status"><span class="dot"></span> Available for freelance work</span>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch light or dark theme" title="Switch theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -106,6 +126,13 @@
     <a class="exp-link" href="playground.html">&#9670; See interactive experiments</a>
   </div>
 </section>
+
+<div class="techstrip">
+  <div class="wrap">
+    <span class="lead">Stack</span>
+    <span class="t">Solidity</span><span class="t">Python</span><span class="t">JavaScript</span><span class="t">Hardhat</span><span class="t">Foundry</span><span class="t">ethers.js v6</span><span class="t">Flask</span><span class="t">Node</span><span class="t">Canvas / WebGL</span><span class="t">Postgres</span><span class="t">Stripe</span>
+  </div>
+</div>
 
 <main>
   <section>
@@ -194,6 +221,23 @@
 </footer>
 
 <script>
+  // theme toggle (persists per browser; defaults to system)
+  (function () {
+    var root = document.documentElement, btn = document.getElementById("theme-btn");
+    var stored; try { stored = localStorage.getItem("theme"); } catch (e) {}
+    if (stored === "dark" || stored === "light") root.setAttribute("data-theme", stored);
+    function current() {
+      var attr = root.getAttribute("data-theme");
+      if (attr) return attr;
+      return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+    }
+    btn.addEventListener("click", function () {
+      var next = current() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+  })();
+
   // copy buttons
   document.querySelectorAll(".copy").forEach(function (btn) {
     btn.addEventListener("click", function () {
