@@ -75,7 +75,7 @@ document.getElementById("sound").addEventListener("click",function(){setSound(!a
 function noise(dur,f0,f1,vol){if(!audioOn||!audioReady)return;var n=actx.createBufferSource();var buf=actx.createBuffer(1,actx.sampleRate*dur,actx.sampleRate);var d=buf.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);n.buffer=buf;var bp=actx.createBiquadFilter();bp.type="bandpass";bp.frequency.setValueAtTime(f0,actx.currentTime);bp.frequency.linearRampToValueAtTime(f1,actx.currentTime+dur);var g=actx.createGain();g.gain.value=vol;n.connect(bp);bp.connect(g);g.connect(master);n.start();}
 
 // ---- world ----
-var state,px,pvx,speed,dist,obstacles,sideObs,spawnZ,sideZ,roadOff,combo,shake,parts,trail,stars,tGlobal=0;
+var state="start",px=0,pvx=0,speed=9,dist=0,obstacles=[],sideObs=[],spawnZ=0,sideZ=0,roadOff=0,combo=0,shake=0,parts=[],trail=[],stars=[],tGlobal=0;
 var best=0;try{best=+localStorage.getItem("racer_best")||0;}catch(e){}
 function HORIZON(){return H*0.36;}
 var CARW=0.16;
@@ -206,10 +206,10 @@ function render(){
 
   // player car + trail
   if(state!=="start"){
-    var pp=roadX(0.94,px);var w=pp.half*(2*CARW)*1.18,ht=w*1.35,y=H*0.9;
+    var pp=roadX(0.94,px);var w=pp.half*0.19,ht=w*1.7,y=H*0.87;
     // exhaust trail
     ctx.globalCompositeOperation="lighter";
-    for(var t=0;t<trail.length;t++){var tr=trail[t];var trp=roadX(0.94-(0.5-tr.t)*0.06,tr.x);ctx.globalAlpha=tr.t*0.5;ctx.fillStyle="#35e6f2";ctx.beginPath();ctx.arc(trp.x,y+ht*0.2+(0.5-tr.t)*30,w*0.28*tr.t*2,0,TAU);ctx.fill();}
+    for(var t=0;t<trail.length;t++){var tr=trail[t];var trp=roadX(0.94-(0.5-tr.t)*0.05,tr.x);ctx.globalAlpha=tr.t*0.3;ctx.fillStyle="#35e6f2";ctx.beginPath();ctx.arc(trp.x,y+(0.5-tr.t)*26,w*0.16*tr.t,0,TAU);ctx.fill();}
     ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";
     ctx.save();ctx.translate(pp.x,y);ctx.rotate(pvx*0.06);
     // body
@@ -218,8 +218,8 @@ function render(){
     ctx.fillStyle="#0a0620";ctx.fillRect(-w*0.3,-ht*0.72,w*0.6,ht*0.32);
     ctx.fillStyle="#ff4fd8";ctx.fillRect(-w*0.5,-ht*0.1,w,ht*0.1);
     // headlights forward glow
-    ctx.globalCompositeOperation="lighter";var lg=ctx.createLinearGradient(0,-ht,0,-ht*3);lg.addColorStop(0,"rgba(255,255,220,.5)");lg.addColorStop(1,"rgba(255,255,220,0)");
-    ctx.fillStyle=lg;ctx.beginPath();ctx.moveTo(-w*0.35,-ht);ctx.lineTo(-w*0.9,-ht*2.6);ctx.lineTo(w*0.9,-ht*2.6);ctx.lineTo(w*0.35,-ht);ctx.closePath();ctx.fill();
+    ctx.globalCompositeOperation="lighter";var lg=ctx.createLinearGradient(0,-ht,0,-ht*3.4);lg.addColorStop(0,"rgba(255,255,210,.28)");lg.addColorStop(1,"rgba(255,255,210,0)");
+    ctx.fillStyle=lg;ctx.beginPath();ctx.moveTo(-w*0.35,-ht);ctx.lineTo(-w*1.4,-ht*3.4);ctx.lineTo(w*1.4,-ht*3.4);ctx.lineTo(w*0.35,-ht);ctx.closePath();ctx.fill();
     ctx.globalCompositeOperation="source-over";
     ctx.restore();
   }
