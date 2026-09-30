@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Neon Arcade — ashur0</title>
+<meta name="description" content="Three browser games built from scratch: a neon arena survivor, a synthwave racer, and a twin-stick shooter.">
+<meta property="og:title" content="Neon Arcade">
+<meta property="og:description" content="Three browser games, no engine. Play in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2335e6f2'/%3E%3Cstop offset='1' stop-color='%23ff4fd8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230a0d13'/%3E%3Ccircle cx='16' cy='16' r='7' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{color-scheme:dark;--font:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+    padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+  *{box-sizing:border-box;}
+  body{margin:0;background:#06070d;color:#eaf0ff;font-family:var(--font);-webkit-font-smoothing:antialiased;min-height:100%;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px;}
+  header{padding-block:44px 8px;}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7bd8ff;margin:0 0 12px;}
+  h1{margin:0 0 12px;font-size:clamp(32px,7vw,52px);letter-spacing:-.01em;line-height:1.05;
+    background:linear-gradient(90deg,#35e6f2,#a78bff 50%,#ff4fd8);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .lead{color:#9aa3ba;font-size:16px;max-width:58ch;margin:0;line-height:1.6;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-block:36px;}
+  @media(max-width:720px){.grid{grid-template-columns:1fr;}}
+  .card{position:relative;display:flex;flex-direction:column;text-decoration:none;color:inherit;border:1px solid #1c2033;border-radius:16px;overflow:hidden;background:#0b0e18;transition:transform .12s,border-color .12s,box-shadow .12s;}
+  .card:hover{transform:translateY(-3px);border-color:#35e6f2;box-shadow:0 14px 40px rgba(0,0,0,.5);}
+  .art{height:150px;position:relative;overflow:hidden;}
+  .art canvas{width:100%;height:100%;display:block;}
+  .body{padding:16px 17px 18px;}
+  .body h2{margin:0 0 4px;font-size:17px;font-weight:600;}
+  .body p{margin:0 0 12px;font-size:13px;color:#9aa3ba;line-height:1.55;}
+  .play{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#35e6f2;}
+  .play::after{content:" \25B6";}
+  footer{border-top:1px solid #1c2033;margin-top:20px;}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;padding-block:22px 40px;color:#5b6479;font-size:13px;font-family:var(--mono);}
+  footer a{color:#9aa3ba;text-decoration:none;border-bottom:1px solid #232a3d;}
+  footer a:hover{color:#eaf0ff;}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+  .tag{font-family:var(--mono);font-size:11px;color:#9aa3ba;border:1px solid #1c2033;border-radius:999px;padding:2px 9px;}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="eyebrow">Built from scratch &middot; no game engine</p>
+  <h1>Neon Arcade</h1>
+  <p class="lead">Three browser games I built with nothing but canvas and JavaScript &mdash; each one is a single self-contained page. Keyboard, gamepad, and touch all work. Best on desktop.</p>
+</div></header>
+
+<div class="wrap">
+  <div class="grid">
+    <a class="card" href="arena.html">
+      <div class="art"><canvas data-demo="arena"></canvas></div>
+      <div class="body">
+        <h2>Neon Arena</h2>
+        <p>Survive endless swarms. Auto-fire, collect XP, level up, and stack upgrades. Bosses every 18s.</p>
+        <div class="tags"><span class="tag">survivor</span><span class="tag">roguelite</span></div>
+        <span class="play">Play</span>
+      </div>
+    </a>
+    <a class="card" href="racer.html">
+      <div class="art"><canvas data-demo="racer"></canvas></div>
+      <div class="body">
+        <h2>Synth Drive</h2>
+        <p>Endless neon highway. Weave through traffic, chain near-miss combos, and don't crash.</p>
+        <div class="tags"><span class="tag">racer</span><span class="tag">high-score</span></div>
+        <span class="play">Play</span>
+      </div>
+    </a>
+    <a class="card" href="shooter.html">
+      <div class="art"><canvas data-demo="shooter"></canvas></div>
+      <div class="body">
+        <h2>Twin Neon</h2>
+        <p>Twin-stick arcade shooter. Move one way, aim another, blast the waves, grab power-ups.</p>
+        <div class="tags"><span class="tag">twin-stick</span><span class="tag">arcade</span></div>
+        <span class="play">Play</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <span>built by <a href="https://github.com/ashur0">ashur0</a></span>
+  <a href="../index.html">&larr; back to portfolio</a>
+</div></footer>
+
+<script>
+// tiny ambient previews in each card (decorative, low-cost)
+Array.prototype.forEach.call(document.querySelectorAll("canvas[data-demo]"),function(cv){
+  var ctx=cv.getContext("2d"),kind=cv.dataset.demo,W,H,DPR;
+  function size(){DPR=Math.min(devicePixelRatio||1,2);var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*DPR|0;cv.height=H*DPR|0;ctx.setTransform(DPR,0,0,DPR,0,0);}
+  size();addEventListener("resize",size);
+  var t=0,dots=[];for(var i=0;i<60;i++)dots.push({x:Math.random(),y:Math.random(),v:Math.random()*.5+.2});
+  function frame(){
+    t+=0.016;ctx.setTransform(DPR,0,0,DPR,0,0);
+    if(kind==="racer"){var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#160a3a");g.addColorStop(.5,"#3a1160");g.addColorStop(.5,"#0a0620");g.addColorStop(1,"#0a0620");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      ctx.fillStyle="#ffd84f";ctx.beginPath();ctx.arc(W/2,H*0.5,26,Math.PI,Math.PI*2);ctx.fill();
+      ctx.strokeStyle="#35e6f2";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(W*.5-6,H*.5);ctx.lineTo(W*.1,H);ctx.moveTo(W*.5+6,H*.5);ctx.lineTo(W*.9,H);ctx.stroke();
+      for(var i=0;i<8;i++){var z=((i/8)+t*0.4)%1;var y=H*.5+(H*.5)*z*z;var w=2+z*40;ctx.fillStyle="rgba(255,216,79,"+(0.2+0.5*z)+")";ctx.fillRect(W/2-w/2,y,w,2+z*8);}
+    }else{
+      ctx.fillStyle=kind==="arena"?"#05060b":"#06070d";ctx.fillRect(0,0,W,H);
+      ctx.globalCompositeOperation="lighter";
+      for(var d=0;d<dots.length;d++){var p=dots[d];p.x+=Math.cos(t+d)*0.002;p.y+=(kind==="shooter"?-1:1)*p.v*0.004;if(p.y>1)p.y=0;if(p.y<0)p.y=1;
+        var col=kind==="arena"?"#35e6f2":"#a78bff";ctx.fillStyle=col;ctx.globalAlpha=.5;ctx.fillRect(p.x*W,p.y*H,2,2);}
+      ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";
+      var cx=W/2+Math.cos(t)*W*0.2,cy=H/2+Math.sin(t*1.3)*H*0.2;
+      ctx.fillStyle=kind==="arena"?"#35e6f2":"#a78bff";ctx.beginPath();ctx.arc(cx,cy,7,0,Math.PI*2);ctx.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>
