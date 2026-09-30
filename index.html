@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ashur — Developer</title>
+<meta name="description" content="Self-taught developer building smart contracts, bots, web apps, and browser games. Here's my real, shipped work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f6f7f9; --surface: #ffffff; --ink: #171b22; --muted: #59626f; --faint: #8a93a1;
+    --line: #e3e7ec; --accent: #16716a; --accent-soft: #e0efed; --ok: #1c7a52; --ok-soft: #e2f2ea;
+    --radius: 12px; --maxw: 760px;
+    color-scheme: light;
+    font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0c0f14; --surface: #141922; --ink: #eef1f5; --muted: #a2acba; --faint: #6b7482;
+      --line: #222833; --accent: #4bc0b5; --accent-soft: #0f2b28; --ok: #58c78d; --ok-soft: #10261c;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0c0f14; --surface: #141922; --ink: #eef1f5; --muted: #a2acba; --faint: #6b7482;
+    --line: #222833; --accent: #4bc0b5; --accent-soft: #0f2b28; --ok: #58c78d; --ok-soft: #10261c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: 20px; padding-block: 0; }
+  .eyebrow { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  header { position: relative; border-bottom: 1px solid var(--line); background: var(--surface); }
+  .head-inner { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 16px; padding-block: 20px; }
+  .name { font-size: 20px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  .name span { color: var(--faint); font-weight: 400; }
+  .status { display: inline-flex; align-items: center; gap: 7px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12.5px; color: var(--ok); background: var(--ok-soft); border: 1px solid color-mix(in srgb, var(--ok) 28%, transparent); padding: 4px 10px; border-radius: 999px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+
+  /* hero with live canvas */
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); background: #0a0d13; }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero-inner { position: relative; z-index: 2; max-width: var(--maxw); margin: 0 auto; padding: 64px 20px 56px; }
+  .hero h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.14; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 18ch; color: #f3f6ff; text-wrap: balance; }
+  .hero p { font-size: 17px; color: #b9c2d6; max-width: 58ch; margin: 0 0 16px; }
+  .hero strong { color: #fff; font-weight: 600; }
+  .hero .exp-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #7ff0e6; text-decoration: none; border: 1px solid rgba(127,240,230,0.4); border-radius: 999px; padding: 9px 18px; }
+  .hero .exp-link:hover { background: rgba(127,240,230,0.12); }
+
+  section { padding-block: 40px; border-top: 1px solid var(--line); }
+  h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 22px; }
+  .services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .svc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+  .svc h3 { margin: 0 0 6px; font-size: 15.5px; font-weight: 600; }
+  .svc p { margin: 0; font-size: 14px; color: var(--muted); }
+
+  .proj-list { display: flex; flex-direction: column; gap: 14px; }
+  .proj { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .proj-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; justify-content: space-between; }
+  .proj h3 { margin: 0; font-size: 16.5px; font-weight: 600; }
+  .proj-link { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12.5px; text-decoration: none; white-space: nowrap; }
+  .proj-link::after { content: " \2197"; }
+  .proj-note { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: var(--faint); white-space: nowrap; }
+  .proj p { margin: 10px 0 14px; font-size: 14.5px; color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11.5px; color: var(--accent); background: var(--accent-soft); padding: 3px 8px; border-radius: 6px; }
+
+  .work-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .work-list li { display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: start; font-size: 14.5px; color: var(--muted); }
+  .work-list .n { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); padding-top: 2px; }
+  .work-list strong { color: var(--ink); font-weight: 600; }
+
+  .contact-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field .label { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); }
+  .field .row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .value { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: var(--ink); user-select: all; word-break: break-all; }
+  .copy { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: var(--accent); background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+  .copy:hover { border-color: var(--accent); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 26px 40px; color: var(--faint); font-size: 13px; }
+  @media (max-width: 560px) { .services { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-inner">
+    <p class="name">Ashur <span>/ developer</span></p>
+    <span class="status"><span class="dot"></span> Available for freelance work</span>
+  </div>
+</header>
+
+<section class="hero">
+  <canvas id="hero-c"></canvas>
+  <div class="hero-inner">
+    <h1>I build smart contracts, bots, web apps, and browser games.</h1>
+    <p>Self-taught developer working mostly in <strong>Solidity, Python, and JavaScript</strong>. I learn by building real, working things and shipping them &mdash; the projects below are all mine, and the playable ones you can try right now.</p>
+    <p>New to freelance platforms, so no client reviews yet. Instead of taking my word for it, look at what I've built and decide for yourself.</p>
+    <a class="exp-link" href="playground.html">&#9670; See interactive experiments</a>
+  </div>
+</section>
+
+<main>
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">What I can build for you</p>
+      <div class="services">
+        <div class="svc"><h3>Smart contracts &amp; DeFi tooling</h3><p>Solidity contracts, flash-loan and arbitrage logic, Hardhat/Foundry test suites against mainnet forks.</p></div>
+        <div class="svc"><h3>Bots &amp; automation</h3><p>Node scripts that watch on-chain events, price feeds, and APIs, then act on them. ethers.js v6.</p></div>
+        <div class="svc"><h3>Web apps</h3><p>Flask back ends with auth, Stripe billing, and a database &mdash; from a landing page to a full small SaaS.</p></div>
+        <div class="svc"><h3>Browser games</h3><p>Canvas and WebGL games that run in any browser, with keyboard and gamepad support.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Selected work</p>
+      <h2>Things I've built and shipped</h2>
+      <div class="proj-list">
+        <article class="proj">
+          <div class="proj-top"><h3>Neon Playground</h3><a class="proj-link" href="playground.html">Open it</a></div>
+          <p>Three interactive scenes in one page: a cursor-reactive particle field, a real fluid ink simulation, and a warping 3D wireframe world &mdash; with an optional sound-reactive mode. Pure canvas, no libraries.</p>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">Canvas</span><span class="tag">WebAudio</span><span class="tag">Fluid sim</span></div>
+        </article>
+        <article class="proj">
+          <div class="proj-top"><h3>Neon Sanction</h3><a class="proj-link" href="https://ashur0.github.io/neon-sanction">Play it live</a></div>
+          <p>A 2D fighting game that runs in the browser &mdash; combos, health bars, AI opponent, and Xbox gamepad support. Built from scratch with no game engine.</p>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">Canvas</span><span class="tag">Gamepad API</span></div>
+        </article>
+        <article class="proj">
+          <div class="proj-top"><h3>Gait Lab</h3><a class="proj-link" href="https://ashur0.github.io/gait-lab">Try it live</a></div>
+          <p>A simulation where small creatures learn to walk &mdash; a physics sim wired to a simple neural controller you can watch adapt in real time.</p>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">WebGL</span><span class="tag">Physics sim</span></div>
+        </article>
+        <article class="proj">
+          <div class="proj-top"><h3>DeFi trading &amp; liquidation bots</h3><span class="proj-note">Private repo &mdash; walkthrough on request</span></div>
+          <p>Flash-loan arbitrage and liquidation bots for Ethereum and Arbitrum. One contract with multiple flash-loan providers (Balancer, Aave, Uniswap V3), tested against a forked mainnet, plus an off-chain observer that measures whether a strategy is actually profitable before any capital is risked.</p>
+          <div class="tags"><span class="tag">Solidity 0.8</span><span class="tag">Hardhat</span><span class="tag">ethers.js v6</span><span class="tag">Node</span></div>
+        </article>
+        <article class="proj">
+          <div class="proj-top"><h3>ChurnWatch</h3><span class="proj-note">In development</span></div>
+          <p>A small SaaS for security researchers: it watches code repositories for new commits, filters to the parts that matter, and flags what's worth a closer look. Full Flask app with magic-link login, a JSON API, Stripe billing, and Postgres.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Postgres</span><span class="tag">Stripe</span></div>
+        </article>
+        <article class="proj">
+          <div class="proj-top"><h3>Smart-contract security work</h3><span class="proj-note">Ongoing</span></div>
+          <p>I audit Solidity for vulnerabilities and write proof-of-concept exploits in Foundry, and I submit findings to public audit contests. It's how I keep sharp on how contracts actually break &mdash; useful when I'm the one writing them for a client.</p>
+          <div class="tags"><span class="tag">Foundry</span><span class="tag">Solidity</span><span class="tag">Security</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">How I work</p>
+      <h2>What to expect</h2>
+      <ul class="work-list">
+        <li><span class="n">01</span><span><strong>I test before I trust it.</strong> Contracts get a test suite against a forked mainnet; strategies get measured on real data before anything goes live. I'd rather tell you something doesn't work than ship you something that only looks like it does.</span></li>
+        <li><span class="n">02</span><span><strong>Plain updates, no jargon wall.</strong> I'll tell you what's done, what's blocked, and what it'll actually cost &mdash; in words that make sense.</span></li>
+        <li><span class="n">03</span><span><strong>Start small.</strong> Happy to take a small first job so you can see how I work before committing to anything bigger.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Get in touch</p>
+      <h2>Let's talk about your project</h2>
+      <div class="contact-box">
+        <div class="field">
+          <span class="label">Email</span>
+          <div class="row"><span class="value" id="email">ashurlarchin@hotmail.com</span><button class="copy" data-copy="ashurlarchin@hotmail.com" data-target="email">Copy</button></div>
+        </div>
+        <div class="field">
+          <span class="label">GitHub</span>
+          <div class="row"><a class="value" style="user-select:auto" href="https://github.com/ashur0">github.com/ashur0</a><button class="copy" data-copy="https://github.com/ashur0">Copy</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Built and coded by Ashur. Every project on this page is my own work.</div>
+</footer>
+
+<script>
+  // copy buttons
+  document.querySelectorAll(".copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var text = btn.getAttribute("data-copy");
+      function done() { var old = btn.textContent; btn.textContent = "Copied"; setTimeout(function () { btn.textContent = old; }, 1400); }
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done).catch(done); } else { done(); }
+    });
+  });
+
+  // subtle hero particle flow
+  (function () {
+    var c = document.getElementById("hero-c"); if (!c) return;
+    var ctx = c.getContext("2d"); var W, H, DPR, ps, N;
+    var mx = -9999, my = -9999;
+    function size() {
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      var r = c.getBoundingClientRect(); W = r.width; H = r.height;
+      c.width = Math.max(1, W * DPR | 0); c.height = Math.max(1, H * DPR | 0);
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      N = Math.min(1400, Math.max(400, (W * H) / 900 | 0));
+      ps = []; for (var i = 0; i < N; i++) ps.push({ x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0 });
+      ctx.fillStyle = "#0a0d13"; ctx.fillRect(0, 0, W, H);
+    }
+    c.addEventListener("pointermove", function (e) { var r = c.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+    c.addEventListener("pointerleave", function () { mx = -9999; my = -9999; });
+    function field(x, y, t) { return (Math.sin(x * 0.004 + t) + Math.cos(y * 0.0038 - t * 0.8) + Math.sin((x + y) * 0.002 + t * 0.5)) * 1.4; }
+    function frame(tm) {
+      var t = tm * 0.00016;
+      ctx.globalCompositeOperation = "source-over"; ctx.fillStyle = "rgba(10,13,19,0.16)"; ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = "lighter";
+      for (var i = 0; i < N; i++) {
+        var p = ps[i], a = field(p.x, p.y, t);
+        p.vx += Math.cos(a) * 0.08; p.vy += Math.sin(a) * 0.08;
+        if (mx > -9000) { var dx = p.x - mx, dy = p.y - my, d2 = dx * dx + dy * dy; if (d2 < 12000) { var d = Math.sqrt(d2) || 1, f = (110 - d) / 110 * 1.1; if (f > 0) { p.vx += dx / d * f; p.vy += dy / d * f; } } }
+        p.vx *= 0.93; p.vy *= 0.93; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x += W; else if (p.x >= W) p.x -= W;
+        if (p.y < 0) p.y += H; else if (p.y >= H) p.y -= H;
+        var sp = Math.min(1, (p.vx * p.vx + p.vy * p.vy) / 8), hue = 172 + sp * 40;
+        ctx.fillStyle = "hsla(" + hue + ",90%," + (55 + sp * 20) + "%," + (0.22 + sp * 0.4) + ")";
+        ctx.fillRect(p.x, p.y, 1 + sp * 1.3, 1 + sp * 1.3);
+      }
+      ctx.globalCompositeOperation = "source-over";
+      requestAnimationFrame(frame);
+    }
+    window.addEventListener("resize", size);
+    size(); requestAnimationFrame(frame);
+  })();
+</script>
+</body>
+</html>
